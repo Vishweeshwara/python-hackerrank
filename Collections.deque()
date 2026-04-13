@@ -1,0 +1,17 @@
+from collections import deque
+
+d = deque()
+
+n = int(input())
+
+for i in range(n):
+
+    command = input().split()
+    method_name = command[0]
+
+    if len(command) > 1:
+        getattr(d, method_name)(command[1])
+    else:
+        getattr(d, method_name)()
+
+print(*d)
