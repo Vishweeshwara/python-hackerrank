@@ -1,0 +1,37 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+
+first_multiple_input = input().rstrip().split()
+
+n = int(first_multiple_input[0])
+
+m = int(first_multiple_input[1])
+
+matrix = []
+
+for _ in range(n):
+    matrix_item = input()
+    matrix.append(matrix_item)
+# 1. Combine the matrix into a single string column-wise
+decoded_string = ""
+for j in range(m):
+    for i in range(n):
+        decoded_string += matrix[i][j]
+
+# 2. Use regex to replace non-alphanumeric characters located BETWEEN alphanumeric characters
+# \w matches [a-zA-Z0-9_], but the problem defines alphanumeric as [a-zA-Z0-9]
+# We use lookbehind and lookahead to ensure we only replace what's in the middle
+pattern = r'(?<=[a-zA-Z0-9])[^a-zA-Z0-9]+(?=[a-zA-Z0-9])'
+
+final_output = re.sub(pattern, ' ', decoded_string)
+
+# 3. Print the result
+print(final_output)
