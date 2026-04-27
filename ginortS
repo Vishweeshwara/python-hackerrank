@@ -1,0 +1,18 @@
+# Read input string
+s = input()
+
+# Sort with a custom key
+# Rule order: lowercase (0), uppercase (1), odd digits (2), even digits (3)
+def sort_key(c):
+    if c.islower():
+        return (0, c)
+    elif c.isupper():
+        return (1, c)
+    elif c.isdigit():
+        if int(c) % 2 != 0:
+            return (2, c) # Odd
+        else:
+            return (3, c) # Even
+
+# Sort the string and join it back together
+print("".join(sorted(s, key=sort_key)))
